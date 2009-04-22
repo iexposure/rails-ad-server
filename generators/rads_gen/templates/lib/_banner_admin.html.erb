@@ -32,7 +32,10 @@
         <%=link_to "View Banner",{ :controller => "rads", 
         :action => "view_banner", 
         :id => banner.id } %> | 
-        <%=link_to "Delete Banner", {:controller => "rads", :action => "delete_banner", :id => banner.id} %></td>
+        <% if admin %>
+          | <%=link_to "Delete Banner", {:controller => "rads", :action => "delete_banner", :id => banner.id} %>
+        <% end %>
+      </td>
     </tr>
     <% } %>
     </table>
