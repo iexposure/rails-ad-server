@@ -56,21 +56,8 @@ module ViewHelpers
   end
   
   def show_rads_admin_panel(campaign_id)
-    campaign = RadsCampaign.find(campaign_id)
-    out = "<div id=\"rads_campaign_panel\"><b>#{campaign.name}</b> (Budget: $#{campaign.budget}, Remaining: $#{campaign.budget_remaining}) #{link_to "Delete Campaign", :controller => "rads", :action => "delete_campaign", :id => campaign.id}<br/>"
-    out += "<table border=\"0\"><tr><td>Banner Name</td><td>Impressions</td><td>Clicks</td><td>Actions</td></tr>" if campaign.rads_banners.length > 0
-    campaign.rads_banners.each{ |banner|
-      impressions = 0
-      clicks = 0
-      banner.rads_banner_stats.each{ |stats| #this adds up all the impressions and clicks for all the months recorded
-        impressions += stats.impressions
-        clicks += stats.clicks
-      }
-      out += "<tr><td>#{banner.name}</td><td>#{impressions}</td><td>#{clicks}</td><td>#{link_to "View Banner", :controller => "rads", :action => "view_banner", :id => banner.id} | #{link_to "Delete Banner", :controller => "rads", :action => "delete_banner", :id => banner.id}</td></tr>"
-    }
-    out += "</table>" if campaign.rads_banners.length > 0
-    out += "</div>"
-    return out
+     campaign = RadsCampaign.find(campaign_id)
+     render :partial => '/rads/banner_admin', :locals => {:campaign => campaign}
   end
 
   def show_rads_banner_html(banner_id)
