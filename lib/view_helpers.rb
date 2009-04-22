@@ -37,9 +37,9 @@ module ViewHelpers
     return  link_to image_tag("/images/rads/advertise_here.gif"), "/advertise"
   end
   
-  def show_rads_admin_panel(campaign_id)
+  def show_rads_admin_panel(campaign_id,args={})
      campaign = RadsCampaign.find(campaign_id)
-     render :partial => '/layouts/parts/banner_admin', :locals => {:campaign => campaign,:admin=> args[:admin].blank? ? false : true}
+     render :partial => '/rads/banner_admin', :locals => {:campaign => campaign,:admin=> args[:admin].blank? ? false : true}
   end
 
   def show_rads_banner_html(banner_id)
